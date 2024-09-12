@@ -1,8 +1,9 @@
-# JavaZone Hands-On Lab
+# Devoxx Hands-On Lab
+## Batch Processing at Scale: a hands-on JobRunr workshop with experiments on Raspberry Pi
 
 ### Overview
 
-This workshop will give you an intro to JobRunr and we will be:
+This workshop will give you an intro to JobRunr and Java on the RPi and we will be:
 
 0. Configuring JobRunr with Spring Boot
 1. Enqueueing a Job with JobRunr
@@ -13,12 +14,15 @@ This workshop will give you an intro to JobRunr and we will be:
     2. using labels
     3. logging and job progress
 3. Ooh no - an exception occurred!
-4. Scheduling a Job
-5. Creating a Recurring Job using the `@Recurring` annotation
-6. Creating a Recurring Job using the `JobScheduler` or `JobRequestScheduler` API
-7. Distributed processing!
+4. Scheduling a Job 
+5. Recurring Jobs
+    1. Creating a Recurring Job using the `@Recurring` annotation
+    2. Creating a Recurring Job using the `JobScheduler` or `JobRequestScheduler` API
+6. Optional: what if something goes wrong in your long running Job?
+
+### Documentation
+All documentation can be found at:
+- https://www.jobrunr.io/en/
+- https://www.pi4j.com/
 
 ### Please rate the Workshop!
-
-![Rate the workshop](rate-qr-code.png "Rate the workshop") or
-use [this URL](https://macsimum.no/?tripetto=91b2e2e2a0f048ff3ba35d374055c50db3d9c5c6dbd2b6c2ef89c6f8d39e79e1&slotid=Workshop%20B%20Tue%2013%3A30)

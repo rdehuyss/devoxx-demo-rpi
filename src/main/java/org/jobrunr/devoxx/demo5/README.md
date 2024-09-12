@@ -1,1 +1,1 @@
-1. Create a Recurring Job using the @Recurring annotation - let's do farming at the beginning of each month
+1. Create a Recurring Job using the @Recurring annotation - let's check whether there is enough beer on tap each morning!

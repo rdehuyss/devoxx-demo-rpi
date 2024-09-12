@@ -1,1 +1,1 @@
-1. Typically, farming starts during Spring. Instead of doing the farming immediately, let's start it somewhere in the future
+1. Typically, drinking a beer is something you don't do in the morning. Instead of drinking the beer immediately, let's schedule it somewhere in the future

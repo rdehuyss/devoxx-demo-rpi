@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
-public class RPiCondition implements Condition {
+public class IsRunningOnRPi implements Condition {
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
         Context pi4jContext = Pi4J.newAutoContext();
