@@ -8,27 +8,34 @@
         <version>3.3.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>org.jobrunr.carbon-intensity-api</groupId>
     <artifactId>devoxx-demo-rpi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>devoxx-demo-rpi</name>
     <description>devoxx-demo-rpi</description>
     <url/>
+
     <licenses>
         <license/>
     </licenses>
+
     <developers>
         <developer/>
     </developers>
+
     <scm>
         <connection/>
         <developerConnection/>
         <tag/>
         <url/>
     </scm>
+
     <properties>
         <java.version>21</java.version>
+        <pi4j.version>2.6.1</pi4j.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -43,10 +50,26 @@
             <artifactId>jobrunr-spring-boot-3-starter</artifactId>
             <version>7.2.2</version>
         </dependency>
+
         <dependency>
             <groupId>com.pi4j</groupId>
             <artifactId>pi4j-core</artifactId>
-            <version>2.6.1</version>
+            <version>${pi4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pi4j</groupId>
+            <artifactId>pi4j-plugin-raspberrypi</artifactId>
+            <version>${pi4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pi4j</groupId>
+            <artifactId>pi4j-plugin-gpiod</artifactId>
+            <version>${pi4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pi4j</groupId>
+            <artifactId>pi4j-plugin-mock</artifactId>
+            <version>${pi4j.version}</version>
         </dependency>
 
         <dependency>
