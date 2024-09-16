@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  */
 public class RaspberryPiBeerService implements BeerService {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(LocalBeerService.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(RaspberryPiBeerService.class);
     private Context pi4j;
     private LcdDisplay lcd = null;
 
