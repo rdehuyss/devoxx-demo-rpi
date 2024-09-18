@@ -10,6 +10,10 @@ public class LocalBeerService implements BeerService {
 
     private final Logger LOGGER = LoggerFactory.getLogger(LocalBeerService.class);
 
+    public LocalBeerService() {
+        LOGGER.info("The LocalBeerService got initialized");
+    }
+
     @Override
     public void brewBeer(Beer beer, String isSomethingGoingWrong) throws Exception {
         LOGGER.info("Getting all the a ingredients to brew " + beer.getLabel());

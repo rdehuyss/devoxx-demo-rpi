@@ -1,16 +1,21 @@
 package org.jobrunr.devoxx.common;
 
 public enum Beer {
-    DUVEL("Duvel", 1),
-    STELLA("Stella", 2),
-    OBUZ("Obuz", 3),
-    WESTVLETEREN("Westvleteren", 0),
-    UNKNOWN("Unknown", 0);
+    DUVEL(1, "Duvel", 21),
+    STELLA(2, "Stella", 16),
+    OBUZ(3, "Obuz", 12),
+    CHIMAY(4, "Chimay", 25),
+    STRAFFE_HENDRIK(5, "Straffe Hendrik", 24),
+    LA_CHOUFFE(6, "La Chouffe", 18),
+    WESTVLETEREN(7, "Westvleteren", 0),
+    UNKNOWN(0, "Unknown", 0);
 
+    private final int id;
     private final String label;
     private final int tapNumber;
 
-    Beer(String label, int tapNumber) {
+    Beer(int id, String label, int tapNumber) {
+        this.id = id;
         this.label = label;
         this.tapNumber = tapNumber;
     }
@@ -24,6 +29,10 @@ public enum Beer {
         return UNKNOWN;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getLabel() {
         return label;
     }
@@ -34,5 +43,9 @@ public enum Beer {
 
     public boolean isOnTap() {
         return tapNumber > 0;
+    }
+
+    public String asJson() {
+        return "{ \"id\": " + id + ", \"label\": \"" + label + "\" }";
     }
 }

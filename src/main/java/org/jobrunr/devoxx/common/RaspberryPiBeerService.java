@@ -56,6 +56,8 @@ public class RaspberryPiBeerService implements BeerService {
         } catch (Exception e) {
             LOGGER.error("Error while initializing the LED: {}", e.getMessage());
         }
+
+        LOGGER.info("The RaspberryPiBeerService got initialized");
     }
 
     private void initLed(Beer beer) {

@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @RestController
 @RequestMapping("demo1")
 public class Demo1API {
@@ -22,6 +27,11 @@ public class Demo1API {
         this.jobScheduler = jobScheduler;
         this.jobRequestScheduler = jobRequestScheduler;
         this.beerService = beerService;
+    }
+
+    @GetMapping(value = "/beer", produces = APPLICATION_JSON_VALUE)
+    public String getBeers() {
+        return "{ \"beer\": [" + Stream.of(Beer.values()).map(Beer::asJson).collect(Collectors.joining(",\n")) + "]}";
     }
 
     @GetMapping("/drink-beer-via-lambda")
