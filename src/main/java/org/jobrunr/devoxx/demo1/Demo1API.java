@@ -1,5 +1,6 @@
 package org.jobrunr.devoxx.demo1;
 
+import org.jobrunr.devoxx.common.Beer;
 import org.jobrunr.devoxx.common.BeerService;
 import org.jobrunr.devoxx.common.DrinkBeerRequestHandler.DrinkBeerRequest;
 import org.jobrunr.scheduling.JobRequestScheduler;
@@ -25,19 +26,19 @@ public class Demo1API {
 
     @GetMapping("/drink-beer-via-lambda")
     public String createJobViaLambda(@RequestParam(required = false, defaultValue = "Duvel") String beerType) {
-        jobScheduler.enqueue(() -> beerService.drinkBeer(beerType));
+        jobScheduler.enqueue(() -> beerService.drinkBeer(Beer.fromLabel(beerType)));
         return "ok";
     }
 
     @GetMapping("/drink-beer-via-jobrequest")
     public String createJobViaJobRequest(@RequestParam(required = false, defaultValue = "Duvel") String beerType) {
-        jobRequestScheduler.enqueue(new DrinkBeerRequest(beerType));
+        jobRequestScheduler.enqueue(new DrinkBeerRequest(Beer.fromLabel(beerType)));
         return "ok";
     }
 
     @GetMapping("/brew-beer")
     public String brewBeer(@RequestParam(required = false, defaultValue = "Duvel") String beerType) {
-        jobScheduler.enqueue(() -> beerService.brewBeer(beerType));
+        jobScheduler.enqueue(() -> beerService.brewBeer(Beer.fromLabel(beerType)));
         return "ok";
     }
 }

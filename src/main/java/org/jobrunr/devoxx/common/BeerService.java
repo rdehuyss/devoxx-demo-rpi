@@ -2,17 +2,17 @@ package org.jobrunr.devoxx.common;
 
 public interface BeerService {
 
-    default boolean isBeerOnTap(String beerName) {
-        return beerName.equalsIgnoreCase("duvel") || beerName.equalsIgnoreCase("obuz");
+    default boolean isBeerOnTap(Beer beer) {
+        return beer.isOnTap();
     }
 
-    default void brewBeer(String beerName) throws Exception {
-        this.brewBeer(beerName, "");
+    default void brewBeer(Beer beer) throws Exception {
+        this.brewBeer(beer, "");
     }
 
-    void brewBeer(String beerName, String isSomethingGoingWrong) throws Exception;
+    void brewBeer(Beer beer, String isSomethingGoingWrong) throws Exception;
 
-    void checkIfBarrelIsEmpty(String beerName);
+    void checkIfBarrelIsEmpty(Beer beer);
 
-     void drinkBeer(String beerName);
+    void drinkBeer(Beer beer);
 }

@@ -11,29 +11,29 @@ public class LocalBeerService implements BeerService {
     private final Logger LOGGER = LoggerFactory.getLogger(LocalBeerService.class);
 
     @Override
-    public void checkIfBarrelIsEmpty(String beerName) {
-        if(!isBeerOnTap(beerName)) {
-            throw new UnsupportedBeerException("The beer " + beerName + " is unsupported - we don't have it on tap!");
-        }
-        System.out.println("Checking whether we have enough " + beerName + ".");
-    }
-
-    @Override
-    public void drinkBeer(String beerName) {
-        System.out.println("Relaxing and drinking some nice " + beerName + " locally");
-    }
-
-    @Override
-    public void brewBeer(String beerName, String isSomethingGoingWrong) throws Exception {
-        LOGGER.info("Getting all the a ingredients to brew " + beerName);
+    public void brewBeer(Beer beer, String isSomethingGoingWrong) throws Exception {
+        LOGGER.info("Getting all the a ingredients to brew " + beer.getLabel());
         Thread.sleep(15_000);
 
-        LOGGER.info("Starting the magic chemistry process for " + beerName);
+        LOGGER.info("Starting the magic chemistry process for " + beer.getLabel());
         Thread.sleep(15_000);
         LOGGER.info("Fermenting everything so we have a nice percentage of alcohol");
         Thread.sleep(15_000);
-        LOGGER.info("Bottling our " + beerName);
+        LOGGER.info("Bottling our " + beer.getLabel());
         Thread.sleep(15_000);
-        LOGGER.info("Celebrating our new " + beerName);
+        LOGGER.info("Celebrating our new " + beer.getLabel());
+    }
+
+    @Override
+    public void checkIfBarrelIsEmpty(Beer beer) {
+        if (!beer.isOnTap()) {
+            throw new UnsupportedBeerException("The beer " + beer.getLabel() + " is unsupported - we don't have it on tap!");
+        }
+        System.out.println("Checking whether we have enough " + beer.getLabel() + ".");
+    }
+
+    @Override
+    public void drinkBeer(Beer beer) {
+        System.out.println("Relaxing and drinking some nice " + beer.getLabel() + " locally");
     }
 }

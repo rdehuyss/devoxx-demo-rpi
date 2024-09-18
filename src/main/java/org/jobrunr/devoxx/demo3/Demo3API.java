@@ -1,5 +1,6 @@
 package org.jobrunr.devoxx.demo3;
 
+import org.jobrunr.devoxx.common.Beer;
 import org.jobrunr.devoxx.common.BeerService;
 import org.jobrunr.scheduling.JobScheduler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ public class Demo3API {
     @GetMapping("/brew-beer")
     public String brewSomeBeer(@RequestParam(required = false, defaultValue = "Duvel") String beerType, @RequestParam(required = false, defaultValue = "toHighTemperature") String somethingHasGoneWrong) {
         // try to limit the amount of retries if our beer brewing process goes wrong
-        jobScheduler.enqueue(() -> beerService.brewBeer(beerType, somethingHasGoneWrong));
+        jobScheduler.enqueue(() -> beerService.brewBeer(Beer.fromLabel(beerType), somethingHasGoneWrong));
         return "ok";
     }
 }

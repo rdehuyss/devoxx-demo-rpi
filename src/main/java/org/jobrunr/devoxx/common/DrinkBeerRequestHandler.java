@@ -9,10 +9,10 @@ public class DrinkBeerRequestHandler implements JobRequestHandler<DrinkBeerReque
 
     @Override
     public void run(DrinkBeerRequest drinkBeerRequest) throws Exception {
-        System.out.println("Relaxing and drinking a " + drinkBeerRequest.beerType);
+        System.out.println("Relaxing and drinking a " + drinkBeerRequest.beer());
     }
 
-    public record DrinkBeerRequest(String beerType) implements JobRequest {
+    public record DrinkBeerRequest(Beer beer) implements JobRequest {
 
         @Override
         public Class<DrinkBeerRequestHandler> getJobRequestHandler() {
