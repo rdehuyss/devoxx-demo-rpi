@@ -43,9 +43,24 @@ public class RaspberryPiBeerService implements BeerService {
         }
 
         try {
-            // LCD example is based on https://www.pi4j.com/examples/components/lcddisplay/
-            // Make sure to enable I2C with `sudo raspi-config` > `Interface Options`
+             /*
+             The LCD example is based on https://www.pi4j.com/examples/components/lcddisplay/
+             Make sure to enable I2C with `sudo raspi-config` > `Interface Options`
+             Once connected, make sure the I2C device is detected, this code uses address 0x27
+
+             $ i2cdetect -y 1
+                     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+                00:                         -- -- -- -- -- -- -- --
+                10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                20: -- -- -- -- -- -- -- 27 -- -- -- -- -- -- -- --
+                30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+                70: -- -- -- -- -- -- -- --
+             */
             lcd = new LcdDisplay(pi4j, 2, 16);
+            LOGGER.info("LCD display initialized on I2C");
         } catch (Exception e) {
             LOGGER.error("Error while initializing the LCD: {}", e.getMessage());
         }
@@ -119,12 +134,13 @@ public class RaspberryPiBeerService implements BeerService {
 
     @Override
     public void drinkBeer(Beer beer) {
-        LOGGER.info("Relaxing and drinking some nice {} locally", beer.getLabel());
+        LOGGER.info("Relaxing and drinking some nice {}", beer.getLabel());
         setLcdText(0, "Drinking");
         setLcdText(1, "   " + beer.getLabel());
     }
 
-    private void setLedState(Beer beer, boolean state) {
+    @Override
+    public void setLedState(Beer beer, boolean state) {
         var output = this.outputs.get(beer);
         if (output == null) {
             LOGGER.error("Can't set the LED state, not defined for {}", beer.getLabel());
@@ -134,19 +150,17 @@ public class RaspberryPiBeerService implements BeerService {
         LOGGER.info("LEd {} is set to {}", output.getName(), state);
     }
 
-    private boolean setLcdText(Integer line, String text) {
+    @Override
+    public void setLcdText(Integer line, String text) {
         if (lcd == null) {
             LOGGER.error("LCD is not initialized");
-            return false;
         }
 
         try {
             lcd.displayLineOfText(text, line);
             LOGGER.info("LCD text on line {} is set to {}", line, text);
-            return true;
         } catch (Exception e) {
             LOGGER.error("Error while changing the LCD text: {}", e.getMessage());
         }
-        return false;
     }
 }

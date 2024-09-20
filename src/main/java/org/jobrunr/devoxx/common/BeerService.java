@@ -15,4 +15,8 @@ public interface BeerService {
     void checkIfBarrelIsEmpty(Beer beer);
 
     void drinkBeer(Beer beer);
+
+    void setLedState(Beer beer, boolean state);
+
+    void setLcdText(Integer line, String text);
 }

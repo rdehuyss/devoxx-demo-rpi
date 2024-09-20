@@ -16,16 +16,16 @@ public class LocalBeerService implements BeerService {
 
     @Override
     public void brewBeer(Beer beer, String isSomethingGoingWrong) throws Exception {
-        LOGGER.info("Getting all the a ingredients to brew " + beer.getLabel());
+        LOGGER.info("Getting all the a ingredients to brew {}", beer.getLabel());
         Thread.sleep(15_000);
 
-        LOGGER.info("Starting the magic chemistry process for " + beer.getLabel());
+        LOGGER.info("Starting the magic chemistry process for {}", beer.getLabel());
         Thread.sleep(15_000);
         LOGGER.info("Fermenting everything so we have a nice percentage of alcohol");
         Thread.sleep(15_000);
-        LOGGER.info("Bottling our " + beer.getLabel());
+        LOGGER.info("Bottling our {}", beer.getLabel());
         Thread.sleep(15_000);
-        LOGGER.info("Celebrating our new " + beer.getLabel());
+        LOGGER.info("Celebrating our new {}", beer.getLabel());
     }
 
     @Override
@@ -33,11 +33,21 @@ public class LocalBeerService implements BeerService {
         if (!beer.isOnTap()) {
             throw new UnsupportedBeerException("The beer " + beer.getLabel() + " is unsupported - we don't have it on tap!");
         }
-        System.out.println("Checking whether we have enough " + beer.getLabel() + ".");
+        LOGGER.info("Checking whether we have enough {}", beer.getLabel());
     }
 
     @Override
     public void drinkBeer(Beer beer) {
-        System.out.println("Relaxing and drinking some nice " + beer.getLabel() + " locally");
+        LOGGER.info("Relaxing and drinking some nice {} locally", beer.getLabel());
+    }
+
+    @Override
+    public void setLedState(Beer beer, boolean state) {
+        LOGGER.warn("LED state can't be set with the local service");
+    }
+
+    @Override
+    public void setLcdText(Integer line, String text) {
+        LOGGER.warn("LCD text can't be set with the local service");
     }
 }

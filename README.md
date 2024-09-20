@@ -15,15 +15,26 @@ This workshop will give you an intro to JobRunr and Java on the RPi and we will 
     2. using labels
     3. logging and job progress
 3. Ooh no - an exception occurred!
-4. Scheduling a Job 
+4. Scheduling a Job
 5. Recurring Jobs
     1. Creating a Recurring Job using the `@Recurring` annotation
     2. Creating a Recurring Job using the `JobScheduler` or `JobRequestScheduler` API
 6. Optional: what if something goes wrong in your long running Job?
 
 ### Documentation
+
 All documentation can be found at:
+
 - https://www.jobrunr.io/en/
 - https://www.pi4j.com/
+
+### Test URLs
+
+http://pi5.local:8080/test/led/on
+http://pi5.local:8080/test/led/off
+http://pi5.local:8080/test/lcd
+http://pi5.local:8080/demo1/drink-beer-via-lambda?beerType=obuz
+http://pi5.local:8080/demo1/drink-beer-via-lambda?beerType=obuz
+http://pi5.local:8080/demo1/brew-beer?beerType=obuz
 
 ### Please rate the Workshop!

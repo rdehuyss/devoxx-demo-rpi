@@ -36,20 +36,23 @@ public class Demo1API {
 
     @GetMapping("/drink-beer-via-lambda")
     public String createJobViaLambda(@RequestParam(required = false, defaultValue = "Duvel") String beerType) {
-        jobScheduler.enqueue(() -> beerService.drinkBeer(Beer.fromLabel(beerType)));
-        return "ok";
+        var beer = Beer.fromLabel(beerType);
+        jobScheduler.enqueue(() -> beerService.drinkBeer(beer));
+        return "ok, drinking beer via lambda for " + beerType;
     }
 
     @GetMapping("/drink-beer-via-jobrequest")
     public String createJobViaJobRequest(@RequestParam(required = false, defaultValue = "Duvel") String beerType) {
-        jobRequestScheduler.enqueue(new DrinkBeerRequest(Beer.fromLabel(beerType)));
-        return "ok";
+        var beer = Beer.fromLabel(beerType);
+        jobRequestScheduler.enqueue(new DrinkBeerRequest(beer));
+        return "ok, drinking beer via job request for " + beerType;
     }
 
     @GetMapping("/brew-beer")
     public String brewBeer(@RequestParam(required = false, defaultValue = "Duvel") String beerType) {
-        jobScheduler.enqueue(() -> beerService.brewBeer(Beer.fromLabel(beerType)));
-        return "ok";
+        var beer = Beer.fromLabel(beerType);
+        jobScheduler.enqueue(() -> beerService.brewBeer(beer));
+        return "ok, brewing " + beerType;
     }
 }
 
