@@ -1,6 +1,5 @@
 package org.jobrunr.devoxx.common;
 
-import org.jobrunr.devoxx.common.tap.LocalBeerTap;
 import org.jobrunr.jobs.lambdas.JobRequest;
 import org.jobrunr.jobs.lambdas.JobRequestHandler;
 import org.slf4j.Logger;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DrinkBeerRequestHandler implements JobRequestHandler<DrinkBeerRequestHandler.DrinkBeerRequest> {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(LocalBeerTap.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(DrinkBeerRequestHandler.class);
 
     private final BeerService beerService;
 
