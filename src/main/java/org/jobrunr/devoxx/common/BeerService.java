@@ -18,5 +18,7 @@ public interface BeerService {
 
     void setLedState(Beer beer, boolean state);
 
+    void toggleLedState(Beer beer);
+
     void setLcdText(Integer line, String text);
 }

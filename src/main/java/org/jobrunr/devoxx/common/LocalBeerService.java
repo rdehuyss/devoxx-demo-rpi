@@ -47,6 +47,11 @@ public class LocalBeerService implements BeerService {
     }
 
     @Override
+    public void toggleLedState(Beer beer) {
+        LOGGER.warn("LED state can't be toggled with the local service");
+    }
+
+    @Override
     public void setLcdText(Integer line, String text) {
         LOGGER.warn("LCD text can't be set with the local service");
     }

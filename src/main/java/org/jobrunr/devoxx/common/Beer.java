@@ -20,6 +20,15 @@ public enum Beer {
         this.tapNumber = tapNumber;
     }
 
+    public static Beer fromId(Integer id) {
+        for (Beer beer : values()) {
+            if (beer.id == id) {
+                return beer;
+            }
+        }
+        return UNKNOWN;
+    }
+
     public static Beer fromLabel(String label) {
         for (Beer beer : values()) {
             if (beer.label.equalsIgnoreCase(label.trim())) {

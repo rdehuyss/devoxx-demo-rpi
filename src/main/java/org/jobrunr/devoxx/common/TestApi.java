@@ -18,10 +18,18 @@ public class TestApi {
         this.beerService = beerService;
     }
 
-    @GetMapping("/led/on")
-    public String setLedsOn() {
-        for (Beer beer : Beer.values()) {
-            beerService.setLedState(beer, true);
+    @GetMapping("/led/{value}")
+    public String setLedsOn(@PathVariable String value) {
+        if (value.equalsIgnoreCase("on") || value.equalsIgnoreCase("off")) {
+            for (Beer beer : Beer.values()) {
+                beerService.setLedState(beer, value.equalsIgnoreCase("on"));
+            }
+        } else {
+            try {
+                beerService.toggleLedState(Beer.fromId(Integer.valueOf(value)));
+            } catch (Exception e) {
+                return "Invalid value: " + value;
+            }
         }
         return "Turned all on";
     }

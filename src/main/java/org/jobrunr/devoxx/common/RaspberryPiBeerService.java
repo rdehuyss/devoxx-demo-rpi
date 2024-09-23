@@ -147,15 +147,26 @@ public class RaspberryPiBeerService implements BeerService {
             return;
         }
         output.setState(state);
-        LOGGER.info("LEd {} is set to {}", output.getName(), state);
+        LOGGER.info("LED {} is set to {}", output.getName(), state);
+    }
+
+    @Override
+    public void toggleLedState(Beer beer) {
+        var output = this.outputs.get(beer);
+        if (output == null) {
+            LOGGER.error("Can't set the LED state, not defined for {}", beer.getLabel());
+            return;
+        }
+        output.toggle();
+        LOGGER.info("LED {} is toggled", output.getName());
     }
 
     @Override
     public void setLcdText(Integer line, String text) {
         if (lcd == null) {
             LOGGER.error("LCD is not initialized");
+            return;
         }
-
         try {
             lcd.displayLineOfText(text, line);
             LOGGER.info("LCD text on line {} is set to {}", line, text);

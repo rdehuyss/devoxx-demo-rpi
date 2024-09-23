@@ -25,17 +25,18 @@ This workshop will give you an intro to JobRunr and Java on the RPi and we will 
 
 All documentation can be found at:
 
-- https://www.jobrunr.io/en/
-- https://www.pi4j.com/
+* https://www.jobrunr.io/en/
+* https://www.pi4j.com/
 
 ### Test URLs
 
-http://pi5.local:8080/test/led/on
-http://pi5.local:8080/test/led/off
-http://pi5.local:8080/test/lcd -> display random text on both lines
-http://localhost:8080/test/lcd/0/test -> display "test" on first line
-http://pi5.local:8080/demo1/drink-beer-via-lambda?beerType=obuz
-http://pi5.local:8080/demo1/drink-beer-via-lambda?beerType=obuz
-http://pi5.local:8080/demo1/brew-beer?beerType=obuz
+* http://pi5.local:8080/test/led/on -> all on
+* http://pi5.local:8080/test/led/off -> all off
+* http://pi5.local:8080/test/led/1 till 6 -> toggle the given LED
+* http://pi5.local:8080/test/lcd -> display random text on both lines
+* http://localhost:8080/test/lcd/0/test -> display "test" on first line
+* http://pi5.local:8080/demo1/drink-beer-via-lambda?beerType=obuz
+* http://pi5.local:8080/demo1/drink-beer-via-lambda?beerType=obuz
+* http://pi5.local:8080/demo1/brew-beer?beerType=obuz
 
 ### Please rate the Workshop!
