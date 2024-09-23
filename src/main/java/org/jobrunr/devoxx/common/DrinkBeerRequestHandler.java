@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DrinkBeerRequestHandler implements JobRequestHandler<DrinkBeerRequestHandler.DrinkBeerRequest> {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(DrinkBeerRequestHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DrinkBeerRequestHandler.class);
 
     private final BeerService beerService;
 

@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
  */
 public class LocalBeerTap implements BeerTap {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(LocalBeerTap.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LocalBeerTap.class);
 
     public LocalBeerTap() {
         LOGGER.info("Starting LocalBeerTap");

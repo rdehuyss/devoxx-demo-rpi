@@ -17,7 +17,7 @@ import java.util.stream.Stream;
  */
 public class RaspberryPiBeerTap implements BeerTap {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(RaspberryPiBeerTap.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RaspberryPiBeerTap.class);
     private final EnumMap<Beer, DigitalOutput> outputs = new EnumMap<>(Beer.class);
     private final Context pi4j;
     private LcdDisplay lcd = null;
