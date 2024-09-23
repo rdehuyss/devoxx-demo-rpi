@@ -33,6 +33,7 @@
 
     <properties>
         <java.version>21</java.version>
+        <jobrunr.version>7.2.2</jobrunr.version>
         <pi4j.version>2.6.1</pi4j.version>
     </properties>
 
@@ -48,7 +49,7 @@
         <dependency>
             <groupId>org.jobrunr</groupId>
             <artifactId>jobrunr-spring-boot-3-starter</artifactId>
-            <version>7.2.2</version>
+            <version>${jobrunr.version}</version>
         </dependency>
 
         <dependency>
