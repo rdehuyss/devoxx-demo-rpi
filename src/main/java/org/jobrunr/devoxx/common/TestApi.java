@@ -1,6 +1,7 @@
 package org.jobrunr.devoxx.common;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,6 +41,15 @@ public class TestApi {
         beerService.setLcdText(0, line1);
         beerService.setLcdText(1, line2);
         return "Set on LCD: " + line1 + ", " + line2;
+    }
+
+    @GetMapping("/lcd/{line}/{text}")
+    public String setRandomTextOnLcd(@PathVariable Integer line, @PathVariable String text) {
+        if (line < 0 || line > 1) {
+            return "Only line 0 and 1 are supported";
+        }
+        beerService.setLcdText(line, text);
+        return "Set on LCD on line " + line + ": " + text;
     }
 
     private String generateRandomText() {
