@@ -19,7 +19,7 @@ public class RaspberryPiBeerTap implements BeerTap {
 
     private final Logger LOGGER = LoggerFactory.getLogger(RaspberryPiBeerTap.class);
     private final EnumMap<Beer, DigitalOutput> outputs = new EnumMap<>(Beer.class);
-    private Context pi4j;
+    private final Context pi4j;
     private LcdDisplay lcd = null;
 
     public RaspberryPiBeerTap(Context pi4JContext) {
@@ -103,6 +103,13 @@ public class RaspberryPiBeerTap implements BeerTap {
         LOGGER.info("Celebrating our new {}", beer.getLabel());
         setLcdText(0, "Ready to drink");
         setLcdText(1, "   " + beer.getLabel());
+
+        for (var i = 0; i < 10; i++) {
+            setLedState(beer, true);
+            Thread.sleep(150);
+            setLedState(beer, false);
+            Thread.sleep(150);
+        }
     }
 
     @Override
@@ -116,10 +123,13 @@ public class RaspberryPiBeerTap implements BeerTap {
     }
 
     @Override
-    public void drinkBeer(Beer beer) {
+    public void drinkBeer(Beer beer) throws Exception {
         LOGGER.info("Relaxing and drinking some nice {}", beer.getLabel());
+        setLedState(beer, true);
         setLcdText(0, "Drinking");
         setLcdText(1, "   " + beer.getLabel());
+        Thread.sleep(2000);
+        setLedState(beer, false);
     }
 
     @Override

@@ -16,7 +16,7 @@ public interface BeerTap {
 
     void checkIfBarrelIsEmpty(Beer beer);
 
-    void drinkBeer(Beer beer);
+    void drinkBeer(Beer beer) throws Exception;
 
     void setLedState(Beer beer, boolean state);
 

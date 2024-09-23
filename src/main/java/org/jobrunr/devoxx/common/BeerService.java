@@ -26,7 +26,7 @@ public class BeerService {
         beerTap.checkIfBarrelIsEmpty(beer);
     }
 
-    public void drinkBeer(Beer beer) {
+    public void drinkBeer(Beer beer) throws Exception {
         beerTap.drinkBeer(beer);
     }
 
