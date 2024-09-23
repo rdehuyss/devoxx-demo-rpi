@@ -5,3 +5,4 @@
 3. Instead of relaxing, we will now brew a Beer which takes a lot of time!
     1. make sure the beer brewing process details are visible on the dashboard
     2. let's add a progress bar of our beer brewing process to the dashboard
+    3. Show the brewing process on the Raspberry Pi LCD
