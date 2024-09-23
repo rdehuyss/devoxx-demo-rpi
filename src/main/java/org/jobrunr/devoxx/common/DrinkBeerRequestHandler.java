@@ -7,9 +7,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class DrinkBeerRequestHandler implements JobRequestHandler<DrinkBeerRequestHandler.DrinkBeerRequest> {
 
+    private final BeerService beerService;
+
+    public DrinkBeerRequestHandler(BeerService beerService) {
+        this.beerService = beerService;
+    }
+
     @Override
     public void run(DrinkBeerRequest drinkBeerRequest) throws Exception {
-        System.out.println("Relaxing and drinking a " + drinkBeerRequest.beer());
+        beerService.drinkBeer(drinkBeerRequest.beer());
     }
 
     public record DrinkBeerRequest(Beer beer) implements JobRequest {
