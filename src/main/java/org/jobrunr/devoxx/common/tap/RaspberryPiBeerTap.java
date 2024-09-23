@@ -1,13 +1,10 @@
-package org.jobrunr.devoxx.common;
+package org.jobrunr.devoxx.common.tap;
 
-import com.pi4j.Pi4J;
-import com.pi4j.boardinfo.definition.BoardModel;
-import com.pi4j.boardinfo.util.BoardInfoHelper;
 import com.pi4j.context.Context;
 import com.pi4j.io.gpio.digital.DigitalOutput;
 import com.pi4j.io.gpio.digital.DigitalState;
-import com.pi4j.plugin.mock.platform.MockPlatform;
-import com.pi4j.plugin.mock.provider.i2c.MockI2CProvider;
+import org.jobrunr.devoxx.common.Beer;
+import org.jobrunr.devoxx.common.UnsupportedBeerException;
 import org.jobrunr.devoxx.common.lcd.LcdDisplay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,31 +13,17 @@ import java.util.EnumMap;
 import java.util.stream.Stream;
 
 /**
- * A BeerService that will be started when running on RaspberryPi in the {@link org.jobrunr.devoxx.DevoxxDemoRPiConfiguration}.
+ * A RaspberryPiBeerTap that will be started when running on RaspberryPi (see {@link org.jobrunr.devoxx.DevoxxDemoRPiConfiguration}).
  */
-public class RaspberryPiBeerService implements BeerService {
+public class RaspberryPiBeerTap implements BeerTap {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(RaspberryPiBeerService.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(RaspberryPiBeerTap.class);
     private final EnumMap<Beer, DigitalOutput> outputs = new EnumMap<>(Beer.class);
     private Context pi4j;
     private LcdDisplay lcd = null;
 
-    public RaspberryPiBeerService() {
-        try {
-            if (BoardInfoHelper.current().getBoardModel() == BoardModel.UNKNOWN) {
-                LOGGER.warn("The Pi4J library could not detect that this system is a Raspberry Pi board.");
-                LOGGER.warn("For this reason, Mock implementations will be loaded for all I/O.");
-                LOGGER.warn("This means, you can test most functionality of the Pi4J library, but it will not try to interact with I/Os.");
-                this.pi4j = Pi4J.newContextBuilder()
-                        .add(new MockPlatform())
-                        .add(MockI2CProvider.newInstance())
-                        .build();
-            } else {
-                this.pi4j = Pi4J.newAutoContext();
-            }
-        } catch (Exception e) {
-            LOGGER.error("Pi4J library failed to load: {}", e.getMessage());
-        }
+    public RaspberryPiBeerTap(Context pi4JContext) {
+        this.pi4j = pi4JContext;
 
         try {
              /*
@@ -72,7 +55,7 @@ public class RaspberryPiBeerService implements BeerService {
             LOGGER.error("Error while initializing the LED: {}", e.getMessage());
         }
 
-        LOGGER.info("The RaspberryPiBeerService got initialized");
+        LOGGER.info("Staring RaspberryPiBeerTap");
     }
 
     private void initLed(Beer beer) {

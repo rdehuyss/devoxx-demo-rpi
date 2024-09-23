@@ -1,17 +1,19 @@
-package org.jobrunr.devoxx.common;
+package org.jobrunr.devoxx.common.tap;
 
+import org.jobrunr.devoxx.common.Beer;
+import org.jobrunr.devoxx.common.UnsupportedBeerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * A BeerService that will be started when NOT running on RaspberryPi in the {@link org.jobrunr.devoxx.DevoxxDemoRPiConfiguration}.
+ * A LocalBeerTap that will be used when NOT running on RaspberryPi (see {@link org.jobrunr.devoxx.DevoxxDemoRPiConfiguration}).
  */
-public class LocalBeerService implements BeerService {
+public class LocalBeerTap implements BeerTap {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(LocalBeerService.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(LocalBeerTap.class);
 
-    public LocalBeerService() {
-        LOGGER.info("The LocalBeerService got initialized");
+    public LocalBeerTap() {
+        LOGGER.info("Starting LocalBeerTap");
     }
 
     @Override
@@ -43,16 +45,16 @@ public class LocalBeerService implements BeerService {
 
     @Override
     public void setLedState(Beer beer, boolean state) {
-        LOGGER.warn("LED state can't be set with the local service");
+        LOGGER.warn("LED state can't be set with the local beer tap");
     }
 
     @Override
     public void toggleLedState(Beer beer) {
-        LOGGER.warn("LED state can't be toggled with the local service");
+        LOGGER.warn("LED state can't be toggled with the local beer tap");
     }
 
     @Override
     public void setLcdText(Integer line, String text) {
-        LOGGER.warn("LCD text can't be set with the local service");
+        LOGGER.warn("LCD text can't be set with the local beer tap");
     }
 }

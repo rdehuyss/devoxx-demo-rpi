@@ -38,14 +38,14 @@ public class Demo1API {
     public String createJobViaLambda(@RequestParam(required = false, defaultValue = "Duvel") String beerType) {
         var beer = Beer.fromLabel(beerType);
         jobScheduler.enqueue(() -> beerService.drinkBeer(beer));
-        return "ok, drinking beer via lambda for " + beerType;
+        return "ok, drinking beer " + beerType + " via lambda";
     }
 
     @GetMapping("/drink-beer-via-jobrequest")
     public String createJobViaJobRequest(@RequestParam(required = false, defaultValue = "Duvel") String beerType) {
         var beer = Beer.fromLabel(beerType);
         jobRequestScheduler.enqueue(new DrinkBeerRequest(beer));
-        return "ok, drinking beer via job request for " + beerType;
+        return "ok, drinking beer " + beerType + " via jobrequest";
     }
 
     @GetMapping("/brew-beer")

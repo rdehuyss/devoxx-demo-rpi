@@ -1,24 +1,44 @@
 package org.jobrunr.devoxx.common;
 
-public interface BeerService {
+import org.jobrunr.devoxx.common.tap.BeerTap;
 
-    default boolean isBeerOnTap(Beer beer) {
-        return beer.isOnTap();
+public class BeerService {
+
+    private final BeerTap beerTap;
+
+    public BeerService(BeerTap beerTap) {
+        this.beerTap = beerTap;
     }
 
-    default void brewBeer(Beer beer) throws Exception {
-        this.brewBeer(beer, "");
+    public boolean isBeerOnTap(Beer beer) {
+        return beerTap.isBeerOnTap(beer);
     }
 
-    void brewBeer(Beer beer, String isSomethingGoingWrong) throws Exception;
+    public void brewBeer(Beer beer) throws Exception {
+        beerTap.brewBeer(beer);
+    }
 
-    void checkIfBarrelIsEmpty(Beer beer);
+    public void brewBeer(Beer beer, String isSomethingGoingWrong) throws Exception {
+        beerTap.brewBeer(beer, isSomethingGoingWrong);
+    }
 
-    void drinkBeer(Beer beer);
+    public void checkIfBarrelIsEmpty(Beer beer) {
+        beerTap.checkIfBarrelIsEmpty(beer);
+    }
 
-    void setLedState(Beer beer, boolean state);
+    public void drinkBeer(Beer beer) {
+        beerTap.drinkBeer(beer);
+    }
 
-    void toggleLedState(Beer beer);
+    public void setLedState(Beer beer, boolean state) {
+        beerTap.setLedState(beer, state);
+    }
 
-    void setLcdText(Integer line, String text);
+    public void toggleLedState(Beer beer) {
+        beerTap.toggleLedState(beer);
+    }
+
+    public void setLcdText(Integer line, String text) {
+        beerTap.setLcdText(line, text);
+    }
 }
