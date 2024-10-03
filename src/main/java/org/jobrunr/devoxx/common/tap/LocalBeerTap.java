@@ -54,7 +54,7 @@ public class LocalBeerTap implements BeerTap {
     }
 
     @Override
-    public void setLcdText(Integer line, String text) {
+    public void setLcdText(String line1, String line2) {
         LOGGER.warn("LCD text can't be set with the local beer tap");
     }
 }

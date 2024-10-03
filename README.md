@@ -36,7 +36,7 @@ All documentation can be found at:
 * http://pi5.local:8080/test/led/off -> all off
 * http://pi5.local:8080/test/led/1 till 6 -> toggle the given LED
 * http://pi5.local:8080/test/lcd -> display random text on both lines
-* http://pi5.local:8080/test/lcd/0/test -> display "test" on first line
+* http://pi5.local:8080/test/lcd/line1/line2 -> display "line1" on first line, "line2" on second line
 * http://pi5.local:8080/demo1/drink-beer-via-lambda?beerType=obuz
 * http://pi5.local:8080/demo1/drink-beer-via-jobrequest?beerType=obuz
 * http://pi5.local:8080/demo1/brew-beer?beerType=obuz -> error, to fix!

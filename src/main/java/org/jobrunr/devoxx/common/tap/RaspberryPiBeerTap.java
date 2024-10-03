@@ -79,32 +79,27 @@ public class RaspberryPiBeerTap implements BeerTap {
         setLedState(beer, true);
 
         LOGGER.info("Getting all the a ingredients to brew {}", beer.getLabel());
-        setLcdText(0, "Ingredients for");
-        setLcdText(1, "   " + beer.getLabel());
+        setLcdText("Ingredients for", "   " + beer.getLabel());
         Thread.sleep(15_000);
 
         LOGGER.info("Starting the magic chemistry process for {}", beer.getLabel());
-        setLcdText(0, "Starting brewing");
-        setLcdText(1, "   " + beer.getLabel());
+        setLcdText("Starting brewing", "   " + beer.getLabel());
         Thread.sleep(15_000);
 
         LOGGER.info("Fermenting everything so we have a nice percentage of alcohol");
-        setLcdText(0, "Fermenting");
-        setLcdText(1, "   " + beer.getLabel());
+        setLcdText("Fermenting", "   " + beer.getLabel());
         Thread.sleep(15_000);
 
         LOGGER.info("Bottling our {}", beer.getLabel());
-        setLcdText(0, "Bottling");
-        setLcdText(1, "   " + beer.getLabel());
+        setLcdText("Bottling", "   " + beer.getLabel());
         Thread.sleep(15_000);
 
         setLedState(beer, false);
 
         LOGGER.info("Celebrating our new {}", beer.getLabel());
-        setLcdText(0, "Ready to drink");
-        setLcdText(1, "   " + beer.getLabel());
+        setLcdText("Ready to drink", "   " + beer.getLabel());
 
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 50; i++) {
             setLedState(beer, true);
             Thread.sleep(150);
             setLedState(beer, false);
@@ -118,16 +113,14 @@ public class RaspberryPiBeerTap implements BeerTap {
             throw new UnsupportedBeerException("The beer " + beer.getLabel() + " is unsupported - we don't have it on tap!");
         }
         LOGGER.info("Checking whether we have enough {}", beer.getLabel());
-        setLcdText(0, "Checking barrel");
-        setLcdText(1, "   " + beer.getLabel());
+        setLcdText("Checking barrel", "   " + beer.getLabel());
     }
 
     @Override
     public void drinkBeer(Beer beer) throws Exception {
         LOGGER.info("Relaxing and drinking some nice {}", beer.getLabel());
         setLedState(beer, true);
-        setLcdText(0, "Drinking");
-        setLcdText(1, "   " + beer.getLabel());
+        setLcdText("Drinking", "   " + beer.getLabel());
         Thread.sleep(2000);
         setLedState(beer, false);
     }
@@ -155,14 +148,16 @@ public class RaspberryPiBeerTap implements BeerTap {
     }
 
     @Override
-    public void setLcdText(Integer line, String text) {
+    public void setLcdText(String line1, String line2) {
         if (lcd == null) {
             LOGGER.error("LCD is not initialized");
             return;
         }
         try {
-            lcd.displayLineOfText(text, line);
-            LOGGER.info("LCD text on line {} is set to {}", line, text);
+            lcd.clearDisplay();
+            lcd.displayLineOfText(line1, 0);
+            lcd.displayLineOfText(line2, 1);
+            LOGGER.info("LCD text is set to {}/{}", line1, line2);
         } catch (Exception e) {
             LOGGER.error("Error while changing the LCD text: {}", e.getMessage());
         }

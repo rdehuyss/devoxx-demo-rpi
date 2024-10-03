@@ -22,5 +22,5 @@ public interface BeerTap {
 
     void toggleLedState(Beer beer);
 
-    void setLcdText(Integer line, String text);
+    void setLcdText(String line1, String line2);
 }

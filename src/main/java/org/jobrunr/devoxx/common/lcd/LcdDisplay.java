@@ -113,6 +113,15 @@ public class LcdDisplay extends I2CDevice {
      */
     @Override
     protected void init(I2C i2c) {
+        initializeDisplay();
+
+        clearDisplay();
+
+        // Enable backlight
+        setDisplayBacklight(true);
+    }
+
+    private void initializeDisplay() {
         sendLcdTwoPartsCommand((byte) 0x03);
         sendLcdTwoPartsCommand((byte) 0x03);
         sendLcdTwoPartsCommand((byte) 0x03);
@@ -122,11 +131,6 @@ public class LcdDisplay extends I2CDevice {
         sendLcdTwoPartsCommand((byte) (LCD_FUNCTION_SET | LCD_2LINE | LCD_5x8DOTS | LCD_4BIT_MODE));
         sendLcdTwoPartsCommand((byte) (LCD_DISPLAY_CONTROL | LCD_DISPLAY_ON | LCD_CURSOR_OFF | LCD_BLINK_OFF));
         sendLcdTwoPartsCommand((byte) (LCD_ENTRY_MODE_SET | LCD_ENTRY_LEFT | LCD_ENTRY_SHIFT_DECREMENT));
-
-        clearDisplay();
-
-        // Enable backlight
-        setDisplayBacklight(true);
     }
 
     /**
@@ -141,8 +145,16 @@ public class LcdDisplay extends I2CDevice {
      * Clear the LCD and set cursor to home
      */
     public void clearDisplay() {
-        moveCursorHome();
-        sendLcdTwoPartsCommand(LCD_CLEAR_DISPLAY);
+        try {
+            initializeDisplay();
+            Thread.sleep(50); // Needed to avoid rubbish on the screen?
+            moveCursorHome();
+            Thread.sleep(50); // Needed to avoid rubbish on the screen?
+            sendLcdTwoPartsCommand(LCD_CLEAR_DISPLAY);
+            Thread.sleep(50); // Needed to avoid rubbish on the screen?
+        } catch (InterruptedException e) {
+            logError("Error while clearing display", e);
+        }
     }
 
     /**

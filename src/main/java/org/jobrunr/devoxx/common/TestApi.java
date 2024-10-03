@@ -46,18 +46,14 @@ public class TestApi {
     public String setRandomTextOnLcd() {
         var line1 = generateRandomText();
         var line2 = generateRandomText();
-        beerService.setLcdText(0, line1);
-        beerService.setLcdText(1, line2);
+        beerService.setLcdText(line1, line2);
         return "Set on LCD: " + line1 + ", " + line2;
     }
 
-    @GetMapping("/lcd/{line}/{text}")
-    public String setRandomTextOnLcd(@PathVariable Integer line, @PathVariable String text) {
-        if (line < 0 || line > 1) {
-            return "Only line 0 and 1 are supported";
-        }
-        beerService.setLcdText(line, text);
-        return "Set on LCD on line " + line + ": " + text;
+    @GetMapping("/lcd/{line1}/{line2}")
+    public String setRandomTextOnLcd(@PathVariable String line1, @PathVariable String line2) {
+        beerService.setLcdText(line1, line2);
+        return "Set on LCD: " + line1 + "/" + line2;
     }
 
     private String generateRandomText() {

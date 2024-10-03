@@ -38,7 +38,7 @@ public class BeerService {
         beerTap.toggleLedState(beer);
     }
 
-    public void setLcdText(Integer line, String text) {
-        beerTap.setLcdText(line, text);
+    public void setLcdText(String line1, String line2) {
+        beerTap.setLcdText(line1, line2);
     }
 }
