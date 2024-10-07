@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.EnumMap;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Stream;
 
 /**
@@ -18,6 +19,7 @@ import java.util.stream.Stream;
 public class RaspberryPiBeerTap implements BeerTap {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RaspberryPiBeerTap.class);
+    private static final ReentrantLock lock = new ReentrantLock();
     private final EnumMap<Beer, DigitalOutput> outputs = new EnumMap<>(Beer.class);
     private final Context pi4j;
     private LcdDisplay lcd = null;
@@ -153,13 +155,21 @@ public class RaspberryPiBeerTap implements BeerTap {
             LOGGER.error("LCD is not initialized");
             return;
         }
-        try {
-            lcd.clearDisplay();
-            lcd.displayLineOfText(line1, 0);
-            lcd.displayLineOfText(line2, 1);
-            LOGGER.info("LCD text is set to {}/{}", line1, line2);
-        } catch (Exception e) {
-            LOGGER.error("Error while changing the LCD text: {}", e.getMessage());
+
+        if(lock.tryLock()) {
+            try {
+                lcd.clearDisplay();
+                lcd.displayLineOfText(line1, 0);
+                lcd.displayLineOfText(line2, 1);
+                LOGGER.info("LCD text is set to {}/{}", line1, line2);
+                Thread.sleep(15_000);
+            } catch (Exception e) {
+                LOGGER.error("Error while changing the LCD text: {}", e.getMessage());
+            } finally {
+                lock.unlock();
+            }
+        } else {
+            LOGGER.info("Could not get lock to write to LCD");
         }
     }
 }
